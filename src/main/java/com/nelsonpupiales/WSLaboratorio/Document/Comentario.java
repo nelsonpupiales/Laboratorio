@@ -30,7 +30,7 @@ public class Comentario {
     public Comentario() {        
     }
 
-    //Set y Get 
+    //Set y Get para comentarios
     
     public String getId() {
         return id;
