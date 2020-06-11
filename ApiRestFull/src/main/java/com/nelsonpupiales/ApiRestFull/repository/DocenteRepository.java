@@ -5,7 +5,8 @@
  */
 package com.nelsonpupiales.ApiRestFull.repository;
 
-import com.nelsonpupiales.ApiRestFull.model.Book;
+import com.nelsonpupiales.ApiRestFull.model.Docente;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -13,10 +14,14 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  *
  * @author Nelson Pupiales
  */
-public interface BookRepository extends MongoRepository<Book, Integer>{
-
+public interface DocenteRepository extends MongoRepository<Docente, Integer>{
+    
     public void deleteById(String id);
 
-    public Optional<Book> findById(String id);
+    public Optional<Docente> findByuserDocente(String userDocente);
+    
+    
+    public Optional<Docente> findBypassDocente(String passDocente);
+   
     
 }

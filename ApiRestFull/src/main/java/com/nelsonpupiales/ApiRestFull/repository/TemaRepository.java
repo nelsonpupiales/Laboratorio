@@ -5,18 +5,26 @@
  */
 package com.nelsonpupiales.ApiRestFull.repository;
 
-import com.nelsonpupiales.ApiRestFull.model.Book;
+import com.nelsonpupiales.ApiRestFull.model.Tema;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 /**
  *
  * @author Nelson Pupiales
  */
-public interface BookRepository extends MongoRepository<Book, Integer>{
+public interface TemaRepository extends MongoRepository<Tema, Integer>{
 
     public void deleteById(String id);
 
-    public Optional<Book> findById(String id);
+    public Optional<Tema> findById(String id);
+    
+    public List<Tema> findByIdLibro(String idLibro);
+    
+   
+
+   
     
 }

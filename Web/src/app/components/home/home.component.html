@@ -1,0 +1,99 @@
+<br><br>
+<div class="row">
+  <button type="button" class="btn btn-primary" data-toggle="modal"  routerLink="detalle/{{libro.id}}" >Seleccionar</button>
+  <div class="col">
+    <!-- Button trigger modal  -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" (click)="borrar()">
+      Nuevo Libro
+    </button>
+
+
+    <h1>Carga de Libros</h1>
+      <table class="table">
+        <thead>
+          <tr>      
+            <!--<th scope="col">Id</th>-->
+            <th scope="col">Nombre</th>
+            <th scope="col">Autor</th>
+            <th scope="col">&nbsp;</th>
+            <th scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let libro of libros">      
+            <!--<td>{{libro.id}}</td>-->
+            <td>{{libro.bookName}}</td>
+            <td>{{libro.authorName}}</td> 
+            <td><button type="button" class="btn btn-primary" data-toggle="modal"  routerLink="detalle/{{libro.id}}" >Seleccionar</button></td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal"  (click)="update(libro.id)" data-toggle="modal" data-target="#exampleModalLongActualizar">Actualizar</button></td>
+            <td><button type="button" class="btn btn-primary" (click)="delete(libro.id)">Borrar</button></td>
+          </tr>    
+        </tbody>
+      </table>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- Modal Insertar-->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Formulario Libro</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">     
+            <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Nombre Libro" [(ngModel)]="libro.bookName">    
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="authorName" name="authorName" placeholder="Autor Libro" [(ngModel)]="libro.authorName">    
+          </div>                 
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="enviar(libro)">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Modal Actualizar-->
+<div class="modal fade" id="exampleModalLongActualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Formulario Libro</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">     
+            <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Nombre Libro" [(ngModel)]="libro.bookName">    
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="authorName" name="authorName" placeholder="Autor Libro" [(ngModel)]="libro.authorName">    
+          </div>                 
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="enviar(libro)">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>

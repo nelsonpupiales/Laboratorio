@@ -1,0 +1,46 @@
+<!-- <h1>{{tema | json}}</h1> -->
+<br><br>
+<div class="row">
+    <div class="col">
+        <h3>Experimentos</h3>
+        <p>{{tema.introduccionTema}}</p>
+        <p>{{tema.categoriaTema}}</p>
+
+        <!-- Button trigger modal  -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" >
+        Nuevo Experimento
+        </button>
+    </div>
+</div>
+
+
+<!-- Modal Insertar Nuevo Tema-->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Formulario Tema</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">     
+              <input type="text" class="form-control" id="introduccionTema" name="introduccionTema" placeholder="Introducción del Tema" >    
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="conceptoTema" name="conceptoTema" placeholder="Concepto" >    
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="categoriaTema" name="categoriaTema" placeholder="Categoria" >    
+            </div>                 
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"  >Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
