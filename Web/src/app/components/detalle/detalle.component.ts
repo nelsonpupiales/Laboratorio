@@ -1,13 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { Injectable } from '@angular/core';
 
 import { DataApiService } from 'src/app/services/data-api.service';
 
-import { ActivatedRoute, Params} from '@angular/router'
+import { ActivatedRoute, Params, Router, CanActivate  } from '@angular/router'
 
-import { LibroInterfaces } from 'src/app/models/libro-interfaces';
-import { TemaInterfaces} from 'src/app/models/tema-interfaces';
+import { TemaInterfaces } from 'src/app/models/tema-interfaces';
+
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 
+import { NgModule } from '@angular/core';
+import { MateriaInterfaces } from 'src/app/models/materia-interfaces';
 
 @Component({
   selector: 'app-detalle',
@@ -16,92 +21,106 @@ import { TemaInterfaces} from 'src/app/models/tema-interfaces';
 })
 export class DetalleComponent implements OnInit {
 
+  formdata;
 
+  public tema: TemaInterfaces = {
+    id:  "",
+    nombreTema: "",
+    introduccionTema: "",
+    instruccionesTema: "",
+    idMateria: ""
+  }
+
+
+  public materia: MateriaInterfaces = {
+    id: "",
+    nombreMateria: "",
+    descripcionMateria: "",
+    codigoMateria: "",
+    idDocente: ""
+
+  }
+
+  data: any;
+
+  
+  
   constructor(
     private dataApi: DataApiService,
-    private route : ActivatedRoute
-  ) { }
+    private formBuilder: FormBuilder,
+    private route : ActivatedRoute,
+    private router: Router,
+    ) {
 
- 
-  public libro : LibroInterfaces = {
-    id:"",
-    bookName: "",
-    authorName: ""
   }
 
-  //Interfaces
-  temas = null;
 
-  public tema : TemaInterfaces={
-    id: "",
-    introduccionTema: "",
-    conceptoTema: "",
-    categoriaTema: "",
-    idLibro:""
+  onClickSubmit(data) {
+    if (this.formdata.invalid) {
+      this.formdata.get('nombreTema').markAsTouched();
+      this.formdata.get('introduccionTema').markAsTouched();
+      this.formdata.get('instruccionesTema').markAsTouched();            
+    }
+    
+   
+    console.log(data)
+    //console.log(this.formdata.value.description1);
+    this.guardatTema(data)
+
   }
 
- 
   ngOnInit(): void {
-    
+
+    //Carga el ID de materia
     const id = this.route.snapshot.params["id"];
+    this.materia.id = id;
     console.log("Entro: " + id)
-    this.getDatails(id);
-    this.listaTemas(id);
-  }
 
-  //Carga la descripcion de un libro. 
-  getDatails(id: string){
-    this.dataApi.getDatails(id)
-    .subscribe(
-      libro =>{
-        console.log(libro)
-        this.libro = libro;
-      }
-    );
+    //Validar Formulario
+    this.formdata = this.formBuilder.group({
+      nombreTema: ['', [Validators.required]],
+      introduccionTema: ['', [Validators.required, Validators.maxLength(400), Validators.minLength(5)]],       
+      instruccionesTema: ['', [Validators.required, Validators.maxLength(400), Validators.minLength(5)]] 
+    }); 
   }
 
 
-  //Carga lista de temas
-  listaTemas(id){
-    console.log("Temas: " + id);
-    this.dataApi.getDatailsTema(id)
-    .subscribe(
-      tema =>{
-        console.log(tema);
-        this.temas = tema;
-      }
-    )
-  }
-
-
-
-
-  //Almacena informacion en la base de datos "Libros"
-  guardarTema(tema){          
-    const post=
+  //Guardar Tema
+  guardatTema(data){
+    console.log(data)
+    var nombreTema = this.formdata.value.nombreTema
+    var introduccionTema = this.formdata.value.introduccionTema
+    var instruccionesTema = this.formdata.value.instruccionesTema        
+    const post =
     {
-        'id' : this.tema.id,
-        'introduccionTema' : this.tema.introduccionTema,
-        'conceptoTema' : this.tema.conceptoTema,
-        'categoriaTema' : this.tema.categoriaTema,
-        'idLibro' :  this.route.snapshot.params["id"],
-    }; 
-    
-    console.log(post)
+      'id':  this.formdata.value.id,
+      'nombreTema':   nombreTema,
+      'introduccionTema': introduccionTema,  
+      'instruccionesTema': instruccionesTema, 
+      'idMateria': this.materia.id
+    };
     this.dataApi.guardarTema(post)
-    .subscribe(response =>{
-      console.log(response);               
-      this.listaTemas(this.tema.id);
-      //this.libro.id = '';
-      //this.libro.bookName = '';
-      //this.libro.authorName = '';   
-    });    
-  }
+      .subscribe(
+        response =>{
+          console.log(post.idMateria);          
+          this.router.navigate(['../tema/'+ post.idMateria]);    
+        } 
+      )
+    }
+}
 
 
   
 
 
 
-}
+  
+
+  
+
+ 
+
+  
+
+
 

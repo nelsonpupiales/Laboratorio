@@ -3,7 +3,7 @@ import { DataApiService } from 'src/app/services/data-api.service';
 
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
-import { DocenteInterfaces } from 'src/app/models/docente.interfaces';
+import { DocenteInterfaces } from 'src/app/models/docente-interfaces';
 
 @Component({
   selector: 'app-registro',

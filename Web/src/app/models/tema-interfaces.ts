@@ -1,7 +1,8 @@
 export interface TemaInterfaces {
     id?: string;
+    nombreTema?: string;
     introduccionTema?: string;
-    conceptoTema?: string;
-    categoriaTema?: string;
-    idLibro?: string;
+    instruccionesTema?: string;    
+    idMateria?: string;
   }
+  

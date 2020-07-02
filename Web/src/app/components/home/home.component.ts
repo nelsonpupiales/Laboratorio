@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataApiService } from 'src/app/services/data-api.service';
-import { NgForm } from '@angular/forms';
-import { LibroInterfaces } from 'src/app/models/libro-interfaces';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Params} from '@angular/router'
 
+import { LibroInterfaces } from 'src/app/models/libro-interfaces';
+import { DocenteInterfaces } from 'src/app/models/docente-interfaces';
+import { MateriaInterfaces } from 'src/app/models/materia-interfaces';
 
 
 
@@ -14,109 +17,150 @@ import { LibroInterfaces } from 'src/app/models/libro-interfaces';
 export class HomeComponent implements OnInit {
 
   message = '';
+  registroFrom: FormGroup;
+  hide = true;
 
   //Interfaces
   libros = null;
-  
-  public libro : LibroInterfaces = {
-    id:"",
+
+  public libro: LibroInterfaces = {
+    id: "",
     bookName: "",
     authorName: ""
   }
-  
-  
-  constructor( 
-    private dataApi: DataApiService
-    ) { }
 
-  // private docentes: DocenteInterfaces;
+
+  public docente: DocenteInterfaces = {
+    id: "",
+    nombreDocente: "",
+    apellidoDocente: "",
+    correoDocente: "",
+    userDocente: "",
+    passDocente: ""
+  }
+
+
+  materias = null;
+  public materia: MateriaInterfaces = {
+    id: "",
+    nombreMateria: "",
+    descripcionMateria: "",
+    codigoMateria: "",
+    idDocente: ""
+
+  }
+
+
+  constructor(
+    private dataApi: DataApiService,
+    private route : ActivatedRoute,
+    private formBuilder: FormBuilder
+  ) { }
+
   
+  // private docentes: DocenteInterfaces;
+
 
   ngOnInit(): void {
+    this.docente = this.dataApi.getCurrentTutor();
+    this.docente.id = this.docente.id;
+    
+    //Obtenemos el codigo de tutor
+    let idDocente = this.docente.id;
+    console.log("Entro: " + idDocente)
+    this.cargarMaterias(idDocente);
+
     this.message = '';
-    this.getBooke();     
+
+    //Validar botos delformulario de guardar materia 
+    this.registroFrom = this.formBuilder.group({
+      'nombreMateria': [this.materia.nombreMateria, [Validators.required]],
+      'descripcionMateria': [this.materia.descripcionMateria, [Validators.required]],
+      'codigoMateria': [this.materia.codigoMateria, [Validators.required]],
+    });
+  }
+    
+  onRegisterSubmit() {   
+    this.guardarMateria(this.materia);
   }
 
-  //Obtiene todos los datos de la base "Libros"
-  getBooke(){
-    console.log("Cargar lista de libros...");
-    this.dataApi.getAllBooks()
+
+
+ 
+
+  //================================================================ Materia ================================================================
+  
+  //Carga de Materia
+  cargarMaterias(idDocente) {
+    console.log(idDocente);
+    this.dataApi.cargarMaterias(idDocente)
     .subscribe(
-      result => {
-        console.log(result)
-        this.libros = result
-      }      
-    );    
+      materia =>{
+        console.log(materia);
+        this.materias = materia;
+    });
+  }
+
+  //Guardar Materia
+  guardarMateria(materia){
+    const post=
+    {
+        'id' : this.materia.id,
+        'nombreMateria' : this.materia.nombreMateria,
+        'descripcionMateria' : this.materia.descripcionMateria,
+        'codigoMateria' : this.materia.codigoMateria,
+        'idDocente' :  this.docente.id,
+    };         
+    this.dataApi.guardarMateria(post)
+    .subscribe(
+      response =>{
+        console.log(response);               
+        this.cargarMaterias(this.docente.id);
+        this.materia.id = '';
+        this.materia.nombreMateria = '';
+        this.materia.descripcionMateria = '';   
+        this.materia.codigoMateria = '';
+    });   
   }
 
 
-  getDatails(id){
+   //Borrar Materia
+   borrarMateria(id) {
     console.log(id)    
-    this.dataApi.getDatails(id)
-    .subscribe(
-      result => {
-        console.log(result)
-        this.libros= result;
-      }               
-    );        
+    if (confirm("Seguro quiere eliminar el Libro"))
+      this.dataApi.borrarMateria(id)
+        .subscribe(data => {
+          console.log(data)
+          this.cargarMaterias(this.docente.id);
+          this.borrar();
+        },
+          error => console.log('ERROR: ' + error));    
+  }
+
+
+  //Actualizar materia
+  actualizarMateria(id) {
+    this.dataApi.detalleUnaMateria(id)
+      .subscribe(
+        materia => {
+          console.log(materia)
+          this.materia = materia;
+        }
+      );
   }
 
   
 
-  id : string;
+
+  id: string;
   bookName: string;
-  authorName: string;  
-  borrar(){
+  authorName: string;
+  borrar() {
     console.log("Borrar")
     this.libro.id = '';
     this.libro.bookName = '';
     this.libro.authorName = '';
   }
-
-
-
-
-  //Almacena informacion en la base de datos "Libros"
-  enviar(libro){ 
-    const post=
-    {
-        'id' : this.libro.id,
-        'bookName' : this.libro.bookName,
-        'authorName' : this.libro.authorName
-    };    
-    this.dataApi.save(libro)
-    .subscribe(response =>{
-      console.log(response);               
-      this.getBooke();
-      this.libro.id = '';
-      this.libro.bookName = '';
-      this.libro.authorName = '';   
-    });    
-  }
-
-
-  //Borrar Libro
-  delete(id){
-    console.log(id)
-    if(confirm("Seguro quiere eliminar el Libro"))
-    this.dataApi.deleteCustomer(id)
-    .subscribe(data => {
-        console.log(data)
-        this.getBooke();         
-      },
-      error => console.log('ERROR: ' + error));        
-  }
-
-
-  //Actualizar Libro
-  update(id){
-    this.dataApi.getDatails(id)
-    .subscribe(
-      libro =>{
-        console.log(libro)
-        this.libro = libro;
-      }
-    );
-  }
-
+  
+  
 }

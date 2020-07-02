@@ -18,32 +18,13 @@ export class ExperimentoComponent implements OnInit {
     private route : ActivatedRoute
   ) { }
 
-    //Interfaces
-    temas = null;
-
-    public tema : TemaInterfaces={
-      id: "",
-      introduccionTema: "",
-      conceptoTema: "",
-      categoriaTema: "",
-      idLibro:""
-    }
+    
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params["id"];
-    console.log("Entro: " + id)
-    this.getDatailsTema(id);
+    
   }
 
 
-  getDatailsTema(id: String){
-    this.dataApi.getDatailsOneTema(id)
-    .subscribe(
-      tema =>{
-        console.log(tema)
-        this.tema = tema;
-      }
-    );
-  }
+
 
 }

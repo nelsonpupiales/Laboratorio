@@ -1,67 +1,100 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Web</span>
+    <span class="example-spacer"></span>      
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">person</mat-icon>
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">lock_open</mat-icon> 
+  </mat-toolbar-row>
+</mat-toolbar>
+<br>
+<mat-card>
+  <h1>Bienvenido:</h1>
+  <p>{{docente.nombreDocente}}</p>
+  <button mat-button type="submit" class="mat-raised-button mat-primary" data-toggle="modal" data-target="#exampleModalLong" (click)="borrar()" >
+    <span class="material-icons">add</span>Cargar Materia
+  </button>
+</mat-card>
 <br><br>
-<div class="row">
-  <button type="button" class="btn btn-primary" data-toggle="modal"  routerLink="detalle/{{libro.id}}" >Seleccionar</button>
-  <div class="col">
-    <!-- Button trigger modal  -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" (click)="borrar()">
-      Nuevo Libro
-    </button>
 
 
-    <h1>Carga de Libros</h1>
-      <table class="table">
-        <thead>
-          <tr>      
-            <!--<th scope="col">Id</th>-->
-            <th scope="col">Nombre</th>
-            <th scope="col">Autor</th>
-            <th scope="col">&nbsp;</th>
-            <th scope="col">&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let libro of libros">      
-            <!--<td>{{libro.id}}</td>-->
-            <td>{{libro.bookName}}</td>
-            <td>{{libro.authorName}}</td> 
-            <td><button type="button" class="btn btn-primary" data-toggle="modal"  routerLink="detalle/{{libro.id}}" >Seleccionar</button></td>
-            <td><button type="button" class="btn btn-primary" data-toggle="modal"  (click)="update(libro.id)" data-toggle="modal" data-target="#exampleModalLongActualizar">Actualizar</button></td>
-            <td><button type="button" class="btn btn-primary" (click)="delete(libro.id)">Borrar</button></td>
-          </tr>    
-        </tbody>
-      </table>
-  </div>
-</div>
+<tr *ngFor="let materia of materias" layout="row" layout-align="space-around center">   
+  <mat-card class="example-card Aopndd rZXyy">
+    <mat-card-header class="Tc9hUd">
+      <mat-card-title>{{materia.nombreMateria}}</mat-card-title><hr>
+    </mat-card-header>
+    <mat-card-subtitle >Codigo: {{materia.codigoMateria}}</mat-card-subtitle>
+    <mat-card-content class="TQYOZc SZ0kZe1">
+      <br>
+      <br>
+      <p>{{materia.descripcionMateria}}</p>
+    </mat-card-content><hr>
+    <mat-card-actions class="SZ0kZe">
+      <button mat-button  class="mat-raised-button mat-primary" routerLink="../tema/{{materia.id}}">Ingresar</button>     
+      
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="botonmenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
 
-
-
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="borrarMateria(materia.id)">
+          <mat-icon>delete_forever</mat-icon>
+          <span>Eliminar</span>
+        </button>        
+        <button mat-menu-item (click)="actualizarMateria(materia.id)" data-toggle="modal" data-target="#exampleModalLongActualizar">
+          <mat-icon>update</mat-icon>
+          <span>Modificar</span>
+        </button>
+      </mat-menu>
+    </mat-card-actions>
+  </mat-card>
+</tr>
 
 
 
-<!-- Modal Insertar-->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<!-- Modal Insertar Materia-->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">   
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Formulario Libro</h5>
+        <h1 class="modal-title" id="exampleModalLongTitle">Formulario Materia</h1>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-group">     
-            <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Nombre Libro" [(ngModel)]="libro.bookName">    
+        <form [formGroup]="registroFrom" (ngSubmit)="onRegisterSubmit()" novalidate>
+          <div class="form-container">
+            <mat-form-field class="example-full-width">
+              <input id="userDocente" 
+                  matInput 
+                  formControlName="nombreMateria"
+                  [(ngModel)]="materia.nombreMateria" 
+                  placeholder="Nombre Materia" />
+            </mat-form-field><br>
+
+            <mat-form-field class="example-full-width">
+              <input id="userDocente" 
+                  matInput 
+                  formControlName="descripcionMateria"
+                  [(ngModel)]="materia.descripcionMateria" 
+                  placeholder="Descripcion Materia" />
+            </mat-form-field><br>
+
+
+            <mat-form-field class="example-full-width">
+              <input id="codigoMateria" 
+                  matInput 
+                  formControlName="codigoMateria"
+                  [(ngModel)]="materia.codigoMateria" 
+                  placeholder="Codigo Materia" />
+            </mat-form-field><br>
           </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="authorName" name="authorName" placeholder="Autor Libro" [(ngModel)]="libro.authorName">    
-          </div>                 
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button mat-button type="submit" class="mat-raised-button mat-primary" [disabled]="registroFrom.invalid">Ingresar</button>
+          </div>                          
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="enviar(libro)">Guardar</button>
-      </div>
+      </div>      
     </div>
   </div>
 </div>
@@ -70,30 +103,50 @@
 
 
 
-<!-- Modal Actualizar-->
+<!-- Modal Actualizar -->
 <div class="modal fade" id="exampleModalLongActualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Formulario Libro</h5>
+        <h1 class="modal-title" id="exampleModalLongTitle">Actualizar Materia</h1>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-group">     
-            <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Nombre Libro" [(ngModel)]="libro.bookName">    
+        <form [formGroup]="registroFrom" (ngSubmit)="onRegisterSubmit()" novalidate>
+          <div class="form-container">
+            <mat-form-field class="example-full-width">
+              <input id="userDocente" 
+                  matInput 
+                  formControlName="nombreMateria"
+                  [(ngModel)]="materia.nombreMateria" 
+                  placeholder="Nombre Materia" />
+            </mat-form-field><br>
+
+            <mat-form-field class="example-full-width">
+              <input id="userDocente" 
+                  matInput 
+                  formControlName="descripcionMateria"
+                  [(ngModel)]="materia.descripcionMateria" 
+                  placeholder="Descripcion Materia" />
+            </mat-form-field><br>
+
+
+            <mat-form-field class="example-full-width">
+              <input id="codigoMateria" 
+                  matInput 
+                  formControlName="codigoMateria"
+                  [(ngModel)]="materia.codigoMateria" 
+                  placeholder="Codigo Materia" />
+            </mat-form-field><br>
           </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="authorName" name="authorName" placeholder="Autor Libro" [(ngModel)]="libro.authorName">    
-          </div>                 
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button mat-button type="submit" class="mat-raised-button mat-primary" [disabled]="registroFrom.invalid">Actualizar</button>
+          </div>                          
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="enviar(libro)">Actualizar</button>
-      </div>
+      </div>      
     </div>
   </div>
 </div>

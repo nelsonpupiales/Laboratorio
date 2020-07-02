@@ -1,0 +1,98 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <mat-toolbar-row>
+    <span>Web</span>
+    <span class="example-spacer"></span>
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">person</mat-icon>
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">lock_open</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-card class="cabeza">
+  <h1>{{materia.nombreMateria}}</h1>
+  <p>{{materia.descripcionMateria }}</p>
+  <h4>Codigo:{{materia.codigoMateria}}</h4>
+
+
+  <button mat-raised-button class="boton" routerLink="/detalle/{{materia.id}}">
+    <span class="material-icons">add</span>Cargar Tema
+  </button>
+
+  <button mat-raised-button class="boton">
+    <span class="material-icons">add</span>Estudiantes
+  </button>
+</mat-card>
+<br><br>
+
+
+
+
+<tr *ngFor="let tema of temas" layout="row" layout-align="space-around center">
+  <mat-card class="example-card Aopndd rZXyy">
+    <mat-card-header class="Tc9hUd">
+      <mat-card-title>{{tema.nombreTema}}</mat-card-title>
+      <hr>
+    </mat-card-header>
+    <mat-card-subtitle>Codigo:</mat-card-subtitle>
+    <mat-card-content class="TQYOZc SZ0kZe1">
+      <br>
+      <br>
+      <p>{{tema.introduccionTema}}</p>
+    </mat-card-content>
+    <hr>
+    <mat-card-actions class="SZ0kZe">
+      <button mat-button class="mat-raised-button mat-primary"
+        routerLink="/panelTema/{{tema.id}}">Ingresar</button>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="botonmenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="borrarTema(tema.id)">
+          <mat-icon>delete_forever</mat-icon>
+          <span>Eliminar</span>
+        </button>
+        <button mat-menu-item (click)="actualizarTema(tema.id)" data-toggle="modal"
+          data-target="#exampleModalLongActualizar">
+          <mat-icon>update</mat-icon>
+          <span>Modificar</span>
+        </button>
+      </mat-menu>
+    </mat-card-actions>
+  </mat-card>
+</tr>
+
+
+
+
+
+
+
+<!-- Modal Insertar Materia
+<div class="modal fade" id="cargaTema" tabindex="-1" role="dialog" aria-labelledby="cargaTemaTitle" aria-hidden="true">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="cargaTemaTitle">Formulario Materia</h1>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="registroTemaFrom" (ngSubmit)="onRegisterSubmit()" novalidate>          
+          <mat-form-field class="example-full-width">
+            <input id="nombreTema" 
+                matInput 
+                formControlName="nombreTema"
+                [(ngModel)]="tema.nombreTema" 
+                placeholder="Titulo del Tema" />
+          </mat-form-field><br>          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button mat-button  class="mat-raised-button mat-primary" [disabled]="registroTemaFrom.invalid" >Ingresar</button>
+          </div>                          
+        </form>
+      </div>      
+    </div>
+  </div>
+</div>
+-->

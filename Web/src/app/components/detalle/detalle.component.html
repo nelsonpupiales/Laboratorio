@@ -1,70 +1,54 @@
-<!-- <h1>{{libro | json}}</h1> -->
-<!-- <h1>{{tema | json}}</h1> -->
-<br><br>
-<div class="row">
-  <div class="col">
-    <p>{{libro.bookName}}</p>
-    <p>{{libro.authorName}}</p>
-    
-    <!-- Button trigger modal  -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" >
-        Nuevo Tema
-    </button>
+<div class="jumbotron text-center">
+    <h1>Angular Text Editor with Limit Validation</h1>
 
-  <h1>Carga de Temas</h1>
-      <table class="table">
-        <thead>
-          <tr>      
-            <th scope="col">Id</th>
-            <th scope="col">Titulo</th>
-            <th scope="col">Contenido</th>
-            <th scope="col">&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let tema of temas">      
-            <td>{{libro.id}}</td>
-            <td>{{tema.introduccionTema}}</td>
-            <td>{{tema.conceptoTema}}</td> 
-            <td><a routerLink="/experimento/{{tema.id}}">Go To Home</a></td>
-          </tr>    
-        </tbody>
-      </table>
-  </div>
 </div>
-
-
-
-<!-- Modal Insertar Nuevo Tema-->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Formulario Tema</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+<div class="container">
+    <form [formGroup]="formdata" (ngSubmit)="onClickSubmit(formdata.value)">
+        
+        
+        
+        <div class="form-group">           
+            <mat-form-field class="example-full-width">
+                <input id="nombreTema" 
+                    matInput 
+                    formControlName="nombreTema"  
+                                                         
+                    placeholder="Titulo del Tema" />
+              </mat-form-field><br> 
+              <div *ngIf="formdata.controls.nombreTema.errors && formdata.controls.nombreTema.touched" class="error">
+                Adjuntar nombre del Tema.
+            </div> 
         </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">     
-              <input type="text" class="form-control" id="introduccionTema" name="introduccionTema" placeholder="Introducción del Tema" [(ngModel)]="tema.introduccionTema">    
+        
+        <div class="form-group">
+            <label for="email">Introducción:</label>
+            <angular-editor 
+                [placeholder]="'Ingrese aqui el texto...'" 
+                formControlName="introduccionTema"
+                
+                ></angular-editor>
+            <div *ngIf="formdata.controls.introduccionTema.errors && formdata.controls.introduccionTema.touched" class="error">
+                Descripcion requerida (Max 400 - Min 5).
             </div>
-            <div class="form-group">
-              <input type="text" class="form-control" id="conceptoTema" name="conceptoTema" placeholder="Concepto" [(ngModel)]="tema.conceptoTema">    
+        </div>
+        
+        
+        <div class="form-group">
+            <label for="email">Instrucciones:</label>
+            <angular-editor 
+                [placeholder]="'Ingrese aqui el texto...'" 
+                formControlName="instruccionesTema"
+                
+                ></angular-editor>
+            <div *ngIf="formdata.controls.instruccionesTema.errors && formdata.controls.instruccionesTema.touched" class="error">
+                Descripcion requerida (Max 400 - Min 5).
             </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="categoriaTema" name="categoriaTema" placeholder="Categoria" [(ngModel)]="tema.categoriaTema">    
-            </div>                 
-          </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary"  (click)="guardarTema(tema)">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
+
+        <!-- <button type="submit" class="btn btn-primary">Register</button> -->
+        <button mat-button type="submit" class="mat-raised-button mat-primary" [disabled]="formdata.invalid">Ingresar</button>
+    </form>
+</div>
 
 

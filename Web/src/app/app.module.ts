@@ -18,13 +18,18 @@ import { DataApiService } from './services/data-api.service';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
+
+
+import { InicioComponent } from './components/inicio/inicio.component';
 import { HomeComponent } from './components/home/home.component'; 
+import { TemaComponent } from './components/tema/tema.component';
 import { DetalleComponent } from './components/detalle/detalle.component';
 import { ExperimentoComponent } from './components/experimento/experimento.component';
 import { RegistroComponent } from './components/user/registro/registro.component';
 import { PerfilComponent } from './components/user/perfil/perfil.component';
 import { LoginComponent } from './components/user/login/login.component';
-import { InicioComponent } from './components/inicio/inicio.component';
+
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatButtonModule} from '@angular/material/button';
@@ -33,9 +38,11 @@ import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatMenuModule} from '@angular/material/menu';
 
-
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { PanelTemaComponent } from './components/panel-tema/panel-tema.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -46,12 +53,14 @@ import {MatGridListModule} from '@angular/material/grid-list';
     RegistroComponent,
     PerfilComponent,
     LoginComponent,
-    InicioComponent
+    InicioComponent,
+    TemaComponent,
+    PanelTemaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule, ReactiveFormsModule, AngularEditorModule,MatTabsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -59,7 +68,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatCardModule,
     MatToolbarModule,
     MatIconModule,
-    MatGridListModule
+    MatGridListModule,
+    MatMenuModule
   ],
   providers: [DataApiService],
   bootstrap: [AppComponent]
