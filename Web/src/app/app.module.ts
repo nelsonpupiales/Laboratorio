@@ -43,6 +43,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { PanelTemaComponent } from './components/panel-tema/panel-tema.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,7 @@ import {MatTabsModule} from '@angular/material/tabs';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, ReactiveFormsModule, AngularEditorModule,MatTabsModule,
+    FormsModule, ReactiveFormsModule, AngularEditorModule,MatTabsModule,MatExpansionModule,MatListModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,

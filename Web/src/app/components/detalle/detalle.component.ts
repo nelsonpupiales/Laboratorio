@@ -28,7 +28,8 @@ export class DetalleComponent implements OnInit {
     nombreTema: "",
     introduccionTema: "",
     instruccionesTema: "",
-    idMateria: ""
+    bibliografiaTema: "",
+    idMateria: "",
   }
 
 
@@ -59,7 +60,8 @@ export class DetalleComponent implements OnInit {
     if (this.formdata.invalid) {
       this.formdata.get('nombreTema').markAsTouched();
       this.formdata.get('introduccionTema').markAsTouched();
-      this.formdata.get('instruccionesTema').markAsTouched();            
+      this.formdata.get('instruccionesTema').markAsTouched(); 
+      this.formdata.get('bibliografiaTema').markAsTouched();           
     }
     
    
@@ -80,7 +82,8 @@ export class DetalleComponent implements OnInit {
     this.formdata = this.formBuilder.group({
       nombreTema: ['', [Validators.required]],
       introduccionTema: ['', [Validators.required, Validators.maxLength(400), Validators.minLength(5)]],       
-      instruccionesTema: ['', [Validators.required, Validators.maxLength(400), Validators.minLength(5)]] 
+      instruccionesTema: ['', [Validators.required, Validators.maxLength(400), Validators.minLength(5)]], 
+      bibliografiaTema: ['', [Validators.required, Validators.maxLength(400), Validators.minLength(5)]]
     }); 
   }
 
@@ -90,13 +93,15 @@ export class DetalleComponent implements OnInit {
     console.log(data)
     var nombreTema = this.formdata.value.nombreTema
     var introduccionTema = this.formdata.value.introduccionTema
-    var instruccionesTema = this.formdata.value.instruccionesTema        
+    var instruccionesTema = this.formdata.value.instruccionesTema
+    var bibliografiaTema = this.formdata.value.bibliografiaTema        
     const post =
     {
       'id':  this.formdata.value.id,
       'nombreTema':   nombreTema,
       'introduccionTema': introduccionTema,  
       'instruccionesTema': instruccionesTema, 
+      'bibliografiaTema': bibliografiaTema,
       'idMateria': this.materia.id
     };
     this.dataApi.guardarTema(post)

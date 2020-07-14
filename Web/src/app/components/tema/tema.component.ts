@@ -40,6 +40,7 @@ export class TemaComponent implements OnInit {
     nombreTema: "",
     introduccionTema: "",
     instruccionesTema: "",
+    bibliografiaTema: "",
     idMateria: ""
   }
 
@@ -101,7 +102,7 @@ export class TemaComponent implements OnInit {
       this.dataApi.borrarTema(id)
         .subscribe(data => {
           console.log(data)
-          this.cargarTemas(this.materia.id);         
+          this.cargarTemas(this.materia.id);
           //this.borrar();
         },
           error => console.log('ERROR: ' + error)
@@ -120,6 +121,7 @@ export class TemaComponent implements OnInit {
     this.tema.nombreTema = '';
     this.tema.introduccionTema = '';
     this.tema.instruccionesTema = '';
+    this.tema.bibliografiaTema = '';
   }
 
 

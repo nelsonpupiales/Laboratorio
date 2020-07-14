@@ -57,9 +57,6 @@ export class HomeComponent implements OnInit {
     private formBuilder: FormBuilder
   ) { }
 
-  
-  // private docentes: DocenteInterfaces;
-
 
   ngOnInit(): void {
     this.docente = this.dataApi.getCurrentTutor();
@@ -101,6 +98,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  
   //Guardar Materia
   guardarMateria(materia){
     const post=

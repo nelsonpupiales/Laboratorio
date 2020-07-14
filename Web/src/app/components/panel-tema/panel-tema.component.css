@@ -16,3 +16,36 @@
     display: block;
     text-align: center;
 }
+
+
+.texto {
+    margin-left: 1em;
+}
+
+
+.example-full-width {
+    width: 100%;
+  }
+
+  .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+
+  .mat-expansion-panel {
+    box-sizing: content-box;
+    display: block;
+    margin: 11px;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: margin 225ms cubic-bezier(0.4, 0, 0.2, 1),box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: 0px 3px 1px -2px rgba(112, 107, 107, 0.79), 0px 2px 2px 0px rgba(80, 78, 78, 0.52), 0px 1px 5px 0px rgba(77, 129, 149, 0.3);
+}
+
+.botonmenu{
+  margin-left: 1%;
+}
