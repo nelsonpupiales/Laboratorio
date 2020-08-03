@@ -6,7 +6,6 @@
 package com.nelsonpupiales.ApiRestFull.repository;
 
 import com.nelsonpupiales.ApiRestFull.model.Experimento;
-import com.nelsonpupiales.ApiRestFull.model.Tema;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;

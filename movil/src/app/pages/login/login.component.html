@@ -1,0 +1,40 @@
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>
+      <h3>Login</h3>
+      <ion-icon class="iconoLlave" name="key"></ion-icon>
+    </ion-card-title>
+    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content padding>
+    <form>
+      <ion-list>
+        <ion-item lines="full">
+          <ion-label position="floating">Usuario</ion-label>
+          <ion-input type="text" #usuarioEstudiante required ></ion-input>                   
+          <ion-icon  class= "icono" name="person" slot="end"></ion-icon>
+        </ion-item>
+        <br>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Password</ion-label>
+          <ion-icon  class= "icono" name="keypad" slot="end"></ion-icon>
+          <ion-input type="password"  #passEstudiante required></ion-input>          
+        </ion-item> 
+        <br>
+        <br>
+        <ion-button expand="block" share="round" color="secondary" padding (click)="procesoLogin(usuarioEstudiante, passEstudiante )">Login</ion-button>        
+      </ion-list>
+    </form>
+  </ion-card-content>
+  
+  <ion-row>
+    <div text-center>
+      If you don't have an account, please <a (click)="formRegister()">
+        register</a> first!        
+    </div>    
+  </ion-row>
+  <br><br>
+</ion-card>
