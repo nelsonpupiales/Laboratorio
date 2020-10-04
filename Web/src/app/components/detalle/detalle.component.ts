@@ -81,9 +81,9 @@ export class DetalleComponent implements OnInit {
     //Validar Formulario
     this.formdata = this.formBuilder.group({
       nombreTema: ['', [Validators.required]],
-      introduccionTema: ['', [Validators.required, Validators.maxLength(400), Validators.minLength(5)]],       
-      instruccionesTema: ['', [Validators.required, Validators.maxLength(400), Validators.minLength(5)]], 
-      bibliografiaTema: ['', [Validators.required, Validators.maxLength(400), Validators.minLength(5)]]
+      introduccionTema: ['', [Validators.required, Validators.maxLength(1000), Validators.minLength(5)]],       
+      instruccionesTema: ['', [Validators.required, Validators.maxLength(1000), Validators.minLength(5)]], 
+      bibliografiaTema: ['', [Validators.required, Validators.maxLength(1000), Validators.minLength(5)]]
     }); 
   }
 

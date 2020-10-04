@@ -1,65 +1,77 @@
-<mat-toolbar color="primary" class="mat-elevation-z6">
+<br>
+<mat-toolbar>
   <mat-toolbar-row>
-    <span>Web</span>
-    <span class="example-spacer"></span>
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">person</mat-icon>
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">lock_open</mat-icon>
+    <span class="titulo">{{materia.nombreMateria}}</span>
   </mat-toolbar-row>
 </mat-toolbar>
-<mat-card class="cabeza">
-  <h1>{{materia.nombreMateria}}</h1>
+<mat-card class="presentacion"> 
   <p>{{materia.descripcionMateria }}</p>
-  <h4>Codigo:{{materia.codigoMateria}}</h4>
-
-
-  <button mat-raised-button class="boton" routerLink="/detalle/{{materia.id}}">
-    <span class="material-icons">add</span>Cargar Tema
-  </button>
-
-  <button mat-raised-button class="boton">
-    <span class="material-icons">add</span>Estudiantes
-  </button>
+  <p>Código de la clase: {{materia.codigoMateria}}</p>
+  <br>
 </mat-card>
-<br><br>
 
+<mat-card>
+  <br>
+  <div class="botonesEstudiantes">    
+    <button mat-raised-button class="boton">
+      <span class="material-icons">supervisor_account</span>Estudiantes
+    </button>
+  </div>
+  <br>
+</mat-card>
+<br>
 
+<mat-card>
+  <div class="row">
 
-
-<tr *ngFor="let tema of temas" layout="row" layout-align="space-around center">
-  <mat-card class="example-card Aopndd rZXyy">
-    <mat-card-header class="Tc9hUd">
-      <mat-card-title>{{tema.nombreTema}}</mat-card-title>
-      <hr>
-    </mat-card-header>
-    <mat-card-subtitle>Codigo:</mat-card-subtitle>
-    <mat-card-content class="TQYOZc SZ0kZe1">
-      <br>
-      <br>
-      <p>{{tema.introduccionTema}}</p>
-    </mat-card-content>
-    <hr>
-    <mat-card-actions class="SZ0kZe">
-      <button mat-button class="mat-raised-button mat-primary"
-        routerLink="/panelTema/{{tema.id}}">Ingresar</button>
-
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="botonmenu">
-        <mat-icon>more_vert</mat-icon>
+    <mat-card class="example-card Aopndd rZXyy">
+      <button mat-button type="submit" routerLink="/detalle/{{materia.id}}">
+        <div class="plus">
+          <span class="material-icons">
+            add_circle_outline
+          </span>
+        </div>
       </button>
+    </mat-card>
 
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="borrarTema(tema.id)">
-          <mat-icon>delete_forever</mat-icon>
-          <span>Eliminar</span>
-        </button>
-        <button mat-menu-item (click)="actualizarTema(tema.id)" data-toggle="modal"
-          data-target="#exampleModalLongActualizar">
-          <mat-icon>update</mat-icon>
-          <span>Modificar</span>
-        </button>
-      </mat-menu>
-    </mat-card-actions>
-  </mat-card>
-</tr>
+
+    <tr *ngFor="let tema of temas" layout="row" layout-align="space-around center">
+      <mat-card class="example-card Aopndd rZXyy">
+        <mat-card-header class="Tc9hUd">
+          <mat-card-title>{{tema.nombreTema}}</mat-card-title>
+          <hr>
+        </mat-card-header>
+        <mat-card-subtitle>Codigo:</mat-card-subtitle>
+        <mat-card-content class="TQYOZc SZ0kZe1">
+          <br>
+          <br>
+          <p>{{tema.introduccionTema}}</p>
+        </mat-card-content>
+        <hr>
+        <mat-card-actions class="SZ0kZe">
+          <button mat-button class="boton" routerLink="/panelTema/{{tema.id}}">Ingresar</button>
+
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+            class="botonmenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="borrarTema(tema.id)">
+              <mat-icon>delete_forever</mat-icon>
+              <span>Eliminar</span>
+            </button>
+            <button mat-menu-item (click)="actualizarTema(tema.id)" data-toggle="modal"
+              data-target="#exampleModalLongActualizar">
+              <mat-icon>update</mat-icon>
+              <span>Modificar</span>
+            </button>
+          </mat-menu>
+        </mat-card-actions>
+      </mat-card>
+    </tr>
+  </div>
+</mat-card>
 
 
 

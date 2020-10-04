@@ -1,22 +1,32 @@
-.mat-elevation-z6 {
-    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);    
-    position: relative;      
-    z-index: 1;    
+mat-toolbar{
+  background-color:#00363e;
+  color: #fff;
+  border-top-left-radius : 0.6em;
+  border-top-right-radius : 0.6em;
 }
 
-
-.cabeza{
-    line-height: 24px;
-    line-height: 3.4rem;
-    flex: 1;
-    padding: 48px;
-    background-color: #3f51b5;
-    font-weight: 300;
-    color: rgb(255, 255, 255);
-    display: block;
-    text-align: center;
+mat-toolbar-row{
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
+.presentacion{
+  border-top-left-radius : 0em;
+  border-top-right-radius : 0em;
+  border-bottom-left-radius : 0em;
+  border-bottom-right-radius : 0em;
+  background-color:#00363e;
+  color: #fff;
+  text-align: left;
+}
+
+.titulo{
+  font-size: 2em;
+}
+
+.botonesEstudiantes{
+  text-align: right;
+}
 
 .example-full-width {
     width: 100%;
@@ -95,6 +105,19 @@
     margin-left: 10.6em;
   }
   
+
+  .plus .material-icons{ 
+    text-align: left;
+    font-size: 18em;
+    color: #00363e;
+  }
+
+  .boton{
+    background-color: #00363e;
+    color: rgb(255, 255, 255);   
+    border-radius: 0.5em;
+    font-size: 1em;
+  }
   
 
 

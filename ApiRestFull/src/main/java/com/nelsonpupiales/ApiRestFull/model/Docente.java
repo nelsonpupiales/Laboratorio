@@ -27,8 +27,7 @@ public class Docente {
     private String apellidoDocente;
     private String correoDocente;
     public String userDocente;
-    private String passDocente;  
-   
+    private String passDocente;     
 }
 
 

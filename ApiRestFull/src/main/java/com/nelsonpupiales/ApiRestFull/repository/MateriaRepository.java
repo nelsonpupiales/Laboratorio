@@ -18,7 +18,11 @@ public interface MateriaRepository extends MongoRepository<Materia, Integer> {
     
     public void deleteById(String id);
 
-    public Optional<Materia> findById(String id);        
-    
+    public Optional<Materia> findById(String id); 
+        
+    public Optional<Materia> findBycodigoMateria(String codigoMateria);
+        
     public List<Materia> findByIdDocente(String idDocente);
+    
+    public List<Materia> findByid(String id);
 }

@@ -1,13 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataApiService } from 'src/app/services/data-api.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Params} from '@angular/router'
+import { ActivatedRoute, Params } from '@angular/router'
 
 import { LibroInterfaces } from 'src/app/models/libro-interfaces';
 import { DocenteInterfaces } from 'src/app/models/docente-interfaces';
 import { MateriaInterfaces } from 'src/app/models/materia-interfaces';
-
-
 
 @Component({
   selector: 'app-home',
@@ -53,7 +51,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private dataApi: DataApiService,
-    private route : ActivatedRoute,
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder
   ) { }
 
@@ -61,7 +59,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.docente = this.dataApi.getCurrentTutor();
     this.docente.id = this.docente.id;
-    
+
     //Obtenemos el codigo de tutor
     let idDocente = this.docente.id;
     console.log("Entro: " + idDocente)
@@ -76,55 +74,55 @@ export class HomeComponent implements OnInit {
       'codigoMateria': [this.materia.codigoMateria, [Validators.required]],
     });
   }
-    
-  onRegisterSubmit() {   
+
+  onRegisterSubmit() {
     this.guardarMateria(this.materia);
   }
 
 
 
- 
+
 
   //================================================================ Materia ================================================================
-  
+
   //Carga de Materia
   cargarMaterias(idDocente) {
     console.log(idDocente);
     this.dataApi.cargarMaterias(idDocente)
-    .subscribe(
-      materia =>{
-        console.log(materia);
-        this.materias = materia;
-    });
+      .subscribe(
+        materia => {
+          console.log(materia);
+          this.materias = materia;
+        });
   }
 
-  
+
   //Guardar Materia
-  guardarMateria(materia){
-    const post=
+  guardarMateria(materia) {
+    const post =
     {
-        'id' : this.materia.id,
-        'nombreMateria' : this.materia.nombreMateria,
-        'descripcionMateria' : this.materia.descripcionMateria,
-        'codigoMateria' : this.materia.codigoMateria,
-        'idDocente' :  this.docente.id,
-    };         
+      'id': this.materia.id,
+      'nombreMateria': this.materia.nombreMateria,
+      'descripcionMateria': this.materia.descripcionMateria,
+      'codigoMateria': this.materia.codigoMateria,
+      'idDocente': this.docente.id,
+    };
     this.dataApi.guardarMateria(post)
-    .subscribe(
-      response =>{
-        console.log(response);               
-        this.cargarMaterias(this.docente.id);
-        this.materia.id = '';
-        this.materia.nombreMateria = '';
-        this.materia.descripcionMateria = '';   
-        this.materia.codigoMateria = '';
-    });   
+      .subscribe(
+        response => {
+          console.log(response);
+          this.cargarMaterias(this.docente.id);
+          this.materia.id = '';
+          this.materia.nombreMateria = '';
+          this.materia.descripcionMateria = '';
+          this.materia.codigoMateria = '';
+        });
   }
 
 
-   //Borrar Materia
-   borrarMateria(id) {
-    console.log(id)    
+  //Borrar Materia
+  borrarMateria(id) {
+    console.log(id)
     if (confirm("Seguro quiere eliminar el Libro"))
       this.dataApi.borrarMateria(id)
         .subscribe(data => {
@@ -132,7 +130,7 @@ export class HomeComponent implements OnInit {
           this.cargarMaterias(this.docente.id);
           this.borrar();
         },
-          error => console.log('ERROR: ' + error));    
+          error => console.log('ERROR: ' + error));
   }
 
 
@@ -147,7 +145,7 @@ export class HomeComponent implements OnInit {
       );
   }
 
-  
+
 
 
   id: string;
@@ -159,6 +157,6 @@ export class HomeComponent implements OnInit {
     this.libro.bookName = '';
     this.libro.authorName = '';
   }
-  
-  
+
+
 }

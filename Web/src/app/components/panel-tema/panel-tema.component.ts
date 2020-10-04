@@ -56,7 +56,7 @@ export class PanelTemaComponent implements OnInit {
     //Validar Formulario
     this.registroFrom = this.formBuilder.group({
       nombreExperimento: ['', [Validators.required, Validators.maxLength(400), Validators.minLength(5)]],
-      preguntaExperimento: ['', [Validators.required, Validators.maxLength(400), Validators.minLength(5)]],
+      preguntaExperimento: ['', [Validators.required, Validators.maxLength(1000), Validators.minLength(5)]],
     });
 
 

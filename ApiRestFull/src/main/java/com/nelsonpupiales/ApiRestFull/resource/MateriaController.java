@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -27,8 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 
 //Spring REST CORS
-//@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+//@CrossOrigin(origins = "http://localhost:4200")
 
 public class MateriaController {
 
@@ -43,13 +44,13 @@ public class MateriaController {
         return "Su materia fue agregada: " + materia.getId();
     }
 
-    //Obtengo los temas de un Libro especifico se lo obtiene con el idLibro
+    //Obtengo las materias del Docente que va dictar
     @GetMapping("/cargarMaterias/{idDocente}")
     public List<Materia> getTemaIdDocente(@PathVariable String idDocente) {
         return repository.findByIdDocente(idDocente);
     }
-    
-    
+          
+        
     //Carga una sola materia por el ID
     @GetMapping("/detalleUnaMateria/{id}")
     public Optional<Materia> getOneMateria(@PathVariable String id) {      
@@ -57,7 +58,7 @@ public class MateriaController {
         return repository.findById(id);            
     }
     
-
+    
     //Borra una materiaa
     @DeleteMapping("/borrarMateria/{id}")
     public ResponseEntity<String> deleteMateria(@PathVariable("id") String id) {
@@ -65,4 +66,29 @@ public class MateriaController {
         repository.deleteById(id);
         return new ResponseEntity<>("El materia ha sido eliminado!", HttpStatus.OK);
     }
+    
+    
+    
+    //---------------------------------------------  MOVIL  ---------------------------------------------
+    
+    
+      
+    //Carga una sola materia por el CODIGO
+    @GetMapping("/detalleCodeMateria/{codigoMateria}")
+    public Optional<Materia> getOnecodigoMateria(@PathVariable String codigoMateria) {      
+        System.out.println("Se ha seleccionado una sola materia con el ID = " + codigoMateria + "...");
+        return repository.findBycodigoMateria(codigoMateria);            
+    }
+
+    
+    
+    //Carga lista de materias por el Codigo Materia
+    @GetMapping("/CodeMateriaList/{id}")
+    public List<Materia> getCodigoMateria(@PathVariable String id) {
+        return repository.findByid(id);
+    }
+    
+
+
+    
 }
