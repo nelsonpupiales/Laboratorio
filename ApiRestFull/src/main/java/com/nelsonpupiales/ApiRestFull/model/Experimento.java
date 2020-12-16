@@ -29,5 +29,7 @@ public class Experimento {
     private String id;
     private String nombreExperimento;
     private String preguntaExperimento;
+    private String dataExperimento;
+    private String labelExperimento;
     private String idTema;
 }

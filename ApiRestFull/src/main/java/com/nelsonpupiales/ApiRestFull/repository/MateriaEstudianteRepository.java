@@ -14,5 +14,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @author Nelson Pupiales
  */
 public interface MateriaEstudianteRepository extends MongoRepository<MateriaEstudiante, Integer>{
+    
+    public List<MateriaEstudiante> findByIdMateria(String idMateria);
+    
     public List<MateriaEstudiante> findByIdEstudiante(String idEstudiante);
 }

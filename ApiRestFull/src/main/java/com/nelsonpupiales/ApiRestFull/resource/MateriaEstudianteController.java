@@ -46,4 +46,13 @@ public class MateriaEstudianteController {
     public List<MateriaEstudiante> getTemaIdEstudiantes(@PathVariable String idEstudiante) {
         return repository.findByIdEstudiante(idEstudiante);
     }
+    
+    
+    //----------------------------- WEB  -----------------------------
+    
+    //Obtengo lista de los estudiantes matriculados en una sola materia
+    @GetMapping("/cargaListaIdEstudiante/{idMateria}")
+    public List<MateriaEstudiante> getIdMateria(@PathVariable String idMateria) {
+        return repository.findByIdMateria(idMateria);
+    }
 }

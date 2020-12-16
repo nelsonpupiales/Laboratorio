@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 
 //Spring REST CORS
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.DELETE})
 //@CrossOrigin(origins = "http://localhost:4200")
 
 
@@ -65,4 +65,6 @@ public class TemaController {
         repository.deleteById(id);
         return new ResponseEntity<>("El tema ha sido eliminado!", HttpStatus.OK);
     }
+    
+        
 }

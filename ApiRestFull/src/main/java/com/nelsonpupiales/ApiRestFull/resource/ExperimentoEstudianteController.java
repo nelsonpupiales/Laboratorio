@@ -33,7 +33,23 @@ public class ExperimentoEstudianteController {
     @Autowired
     private ExperimentoEstudianteRepository repository; 
    
-   //Almacena información de las practicas en la tabla ExperimentoEstudiante
+//Desarrollo para WEB    
+    
+//Carga de lista los estudiantes por un experimento
+        
+    
+    @GetMapping("/cargaDatosPracticas/{idEstudiante}")
+    public List<ExperimentoEstudiante> getIdEstudiante(@PathVariable String idEstudiante) {
+        return repository.findByIdEstudiante(idEstudiante);
+    } 
+    
+    
+    
+
+    
+//Desarrollo para MOVIL
+
+//Almacena información de las practicas en la tabla ExperimentoEstudiante
     @PostMapping("/guardarExperimentoEstudiante")
     public String saveMateriaEstudiante(@RequestBody ExperimentoEstudiante experimentoestudiante) {
         repository.save(experimentoestudiante);
@@ -49,7 +65,7 @@ public class ExperimentoEstudianteController {
     //Carga una sola materia por el ID
     @GetMapping("/cargarUnaPractica/{id}")
     public Optional<ExperimentoEstudiante> getOneMateria(@PathVariable String id) {      
-        System.out.println("Se ha seleccionado una sola materia con el ID = " + id + "...");
+        System.out.println("Se ha seleccionado una sola practica con el ID = " + id + "...");
         return repository.findById(id);            
     }
 }

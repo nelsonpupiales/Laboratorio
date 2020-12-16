@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 
 //Spring REST CORS
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.DELETE})
 //@CrossOrigin(origins = "http://localhost:4200")
 
 public class MateriaController {
@@ -64,15 +64,14 @@ public class MateriaController {
     public ResponseEntity<String> deleteMateria(@PathVariable("id") String id) {
         System.out.println("Se elimino la materia con el ID = " + id + "...");
         repository.deleteById(id);
-        return new ResponseEntity<>("El materia ha sido eliminado!", HttpStatus.OK);
+        return new ResponseEntity<>("La materia ha sido eliminado!", HttpStatus.OK);
     }
-    
+      
     
     
     //---------------------------------------------  MOVIL  ---------------------------------------------
     
-    
-      
+          
     //Carga una sola materia por el CODIGO
     @GetMapping("/detalleCodeMateria/{codigoMateria}")
     public Optional<Materia> getOnecodigoMateria(@PathVariable String codigoMateria) {      
@@ -88,7 +87,5 @@ public class MateriaController {
         return repository.findByid(id);
     }
     
-
-
     
 }

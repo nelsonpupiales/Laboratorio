@@ -8,6 +8,8 @@ package com.nelsonpupiales.ApiRestFull.resource;
 import com.nelsonpupiales.ApiRestFull.model.Estudiante;
 import com.nelsonpupiales.ApiRestFull.model.Materia;
 import com.nelsonpupiales.ApiRestFull.repository.EstudianteRepository;
+import java.security.MessageDigest;
+import java.security.SecureRandom;
 
 
 import java.util.Optional;
@@ -36,7 +38,19 @@ public class EstudianteController {
     private EstudianteRepository repository; 
     
     @PostMapping("/guardarEstudiante")
-    public String saveEstudiante(@RequestBody Estudiante estudiante) {        
+    public String saveEstudiante(@RequestBody Estudiante estudiante) {
+        
+        
+        //------------SEGURIDAD PARA ENCRIPTAR CLAVE--------------
+        //SecureRandom random = new SecureRandom();
+        //byte[] salt = new byte[16];
+        //random.nextBytes(salt);
+        //String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));        
+        //http://www.mindrot.org/projects/jBCrypt/
+        //https://javalibs.com/artifact/org.mindrot/jbcrypt
+        
+        
+        
         repository.save(estudiante);
 	System.out.println("Se creo nuevo experimento con el ID = " + estudiante.getId()+ "...");
         return "Experimento agregado con la identificación: " + estudiante.getId();                
